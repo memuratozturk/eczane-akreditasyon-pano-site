@@ -106,8 +106,8 @@
         <li>Kritik noktalar & sık denetim bulguları</li>
       </ul>
       <h3>Üyelik bedeli</h3>
-      <div class="price" id="priceBox">₺— <small>/ tek seferlik</small></div>
-      <p class="note">Ödeme onaylandıktan sonra size özel <b>erişim kodu</b> iletilir; kod ile panonun tamamı açılır.</p>
+      <div class="price" id="priceBox">₺— <small>/ aylık</small></div>
+      <p class="note">Aylık üyelik. Ödeme onaylandıktan sonra size <b>erişim kodu</b> iletilir; kod ile panonun tamamı açılır. Erişim kodu her ay yenilenir.</p>
     </div>
 
     <!-- SAĞ: giriş / üyelik -->
@@ -154,7 +154,7 @@
 
         <div class="pay" id="payBox">
           <h3 style="margin-top:0">Ödeme talimatı</h3>
-          <div>Tutar: <b id="payPrice">₺—</b></div>
+          <div>Tutar: <b id="payPrice">₺—</b> <span class="note">/ aylık</span></div>
           <div style="margin-top:8px">Alıcı: <b id="payName">—</b></div>
           <div style="margin-top:8px">IBAN:</div>
           <div class="iban" id="payIban">—</div>
@@ -174,7 +174,9 @@
       Kodu girince içerik cihazınızda çözülür ve internetsiz de kullanılabilir.<br><br>
       <b>Birden çok cihazda kullanabilir miyim?</b> Evet, kodu girdiğiniz her cihazda açılır.
       Kodu lütfen paylaşmayın; paylaşılan kodlar iptal edilebilir.<br><br>
-      <b>İade?</b> Dijital içerik olduğundan, erişim kodu iletildikten sonra iade yapılamaz.
+      <b>Üyelik süresi?</b> Üyelik <b>aylıktır</b>. Erişim kodu her ay yenilenir; ödemesi devam eden
+      üyelere yeni kod iletilir, ödenmeyen dönemde erişim kapanır.<br><br>
+      <b>İade?</b> Dijital içerik olduğundan, ilgili ayın erişim kodu iletildikten sonra iade yapılamaz.
     </p>
   </details>
 
@@ -199,7 +201,7 @@
    AYARLAR — kendi bilgilerinizle değiştirin (placeholder'lar)
    ============================================================ */
 const CFG = {
-  fiyat:    "₺— (belirlenecek)",    // TODO: kesin fiyatı yazın, örn "₺499"
+  fiyat:    "₺500",                 // aylık üyelik bedeli
   whatsapp: "905510038328",         // ülke kodu + numara, BAŞINDA + ve boşluk YOK
   email:    "memuratozturk@gmail.com",
   odeme: {
@@ -214,7 +216,7 @@ const LS_KEY  = "pano_erisim_kodu";
 /* ---- yardımcılar ---- */
 const $ = (id)=>document.getElementById(id);
 document.getElementById("yil").textContent = new Date().getFullYear();
-$("priceBox").innerHTML = CFG.fiyat + ' <small>/ tek seferlik</small>';
+$("priceBox").innerHTML = CFG.fiyat + ' <small>/ aylık</small>';
 
 function setTab(t){
   const login = t==="login";
