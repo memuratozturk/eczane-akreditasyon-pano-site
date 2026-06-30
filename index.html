@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Eczane Akreditasyon Panosu — Üyelik & Giriş</title>
+<meta name="description" content="Hastane eczaneleri için TÜSKA & SKS İlaç Yönetimi akreditasyon hazırlık panosu. Üyelik ile tam erişim." />
+<meta name="theme-color" content="#0e7c66" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-title" content="Eczane Akreditasyon" />
+<meta name="application-name" content="Eczane Akreditasyon" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230e7c66'/%3E%3Cpath d='M50 22v56M22 50h56' stroke='white' stroke-width='12' stroke-linecap='round'/%3E%3C/svg%3E" />
+<style>
+  :root{
+    --bg:#f4f7f6; --card:#fff; --ink:#13211d; --muted:#5b6b66;
+    --brand:#0e7c66; --brand-d:#0a5f4e; --line:#e3eae7; --warn:#b45309; --bad:#b91c1c;
+    --shadow:0 6px 24px rgba(13,40,33,.08);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg); color:var(--ink); line-height:1.5; -webkit-text-size-adjust:100%;}
+  a{color:var(--brand-d)}
+  .wrap{max-width:1000px; margin:0 auto; padding:20px 16px 60px}
+  .hero{background:linear-gradient(135deg,var(--brand),var(--brand-d)); color:#fff; border-radius:20px;
+    padding:34px 26px; box-shadow:var(--shadow)}
+  .hero h1{margin:0 0 8px; font-size:26px; line-height:1.25}
+  .hero p{margin:0; opacity:.95; font-size:15px; max-width:62ch}
+  .badge{display:inline-block; background:rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.35);
+    padding:4px 10px; border-radius:999px; font-size:12px; margin-bottom:14px}
+  .grid{display:grid; gap:16px; margin-top:18px}
+  @media(min-width:760px){.grid.two{grid-template-columns:1fr 1fr}}
+  .card{background:var(--card); border:1px solid var(--line); border-radius:16px; padding:20px; box-shadow:var(--shadow)}
+  .card h2{margin:0 0 6px; font-size:18px}
+  .card h3{margin:14px 0 6px; font-size:14px; color:var(--muted); text-transform:uppercase; letter-spacing:.04em}
+  ul.feat{list-style:none; padding:0; margin:10px 0 0}
+  ul.feat li{padding:7px 0 7px 28px; position:relative; border-bottom:1px dashed var(--line)}
+  ul.feat li:last-child{border-bottom:0}
+  ul.feat li::before{content:"✓"; position:absolute; left:4px; top:7px; color:var(--brand); font-weight:700}
+  label{display:block; font-size:13px; font-weight:600; margin:12px 0 5px}
+  input,textarea,select{width:100%; padding:11px 12px; border:1px solid var(--line); border-radius:10px;
+    font:inherit; background:#fbfdfc; color:var(--ink)}
+  input:focus,textarea:focus{outline:2px solid var(--brand); border-color:var(--brand)}
+  textarea{min-height:80px; resize:vertical}
+  .btn{display:inline-flex; align-items:center; justify-content:center; gap:8px; cursor:pointer;
+    border:0; border-radius:11px; padding:12px 16px; font:inherit; font-weight:700; color:#fff;
+    background:var(--brand); width:100%; margin-top:14px}
+  .btn:hover{background:var(--brand-d)}
+  .btn.wa{background:#1faa53}.btn.wa:hover{background:#168a43}
+  .btn.ghost{background:#eef4f2; color:var(--brand-d)}
+  .btn.ghost:hover{background:#e1ece8}
+  .row{display:flex; gap:10px; flex-wrap:wrap}
+  .row>*{flex:1; min-width:140px}
+  .tabs{display:flex; gap:6px; background:#eef4f2; padding:5px; border-radius:12px; margin-bottom:6px}
+  .tabs button{flex:1; border:0; background:transparent; padding:10px; border-radius:9px; font:inherit;
+    font-weight:700; color:var(--muted); cursor:pointer}
+  .tabs button.active{background:#fff; color:var(--brand-d); box-shadow:0 1px 4px rgba(0,0,0,.08)}
+  .pay{background:#f0f9f6; border:1px dashed var(--brand); border-radius:12px; padding:14px; margin-top:14px; display:none}
+  .pay.show{display:block}
+  .pay .iban{font-family:ui-monospace,Menlo,Consolas,monospace; font-size:15px; font-weight:700; letter-spacing:.04em; word-break:break-all}
+  .note{font-size:12.5px; color:var(--muted)}
+  .msg{margin-top:12px; padding:11px 12px; border-radius:10px; font-size:14px; display:none}
+  .msg.ok{display:block; background:#e7f6ef; color:#0a5f3f; border:1px solid #bfe6d4}
+  .msg.err{display:block; background:#fdecec; color:#9b1c1c; border:1px solid #f4c7c7}
+  .price{font-size:30px; font-weight:800; color:var(--brand-d)}
+  .price small{font-size:14px; color:var(--muted); font-weight:600}
+  .consent{display:flex; gap:9px; align-items:flex-start; margin-top:12px}
+  .consent input{width:auto; margin-top:3px}
+  .consent label{margin:0; font-weight:500; font-size:12.5px; color:var(--muted)}
+  details{margin-top:14px; border:1px solid var(--line); border-radius:12px; padding:0 14px; background:#fff}
+  details summary{cursor:pointer; font-weight:700; padding:13px 0}
+  footer{margin-top:30px; text-align:center; color:var(--muted); font-size:12.5px; line-height:1.7}
+  footer a{color:var(--muted)}
+  /* Pano (giriş sonrası) */
+  #panoWrap{display:none; position:fixed; inset:0; background:#fff; z-index:50; flex-direction:column}
+  #panoBar{height:46px; flex:0 0 46px; background:var(--brand-d); color:#fff; display:flex; align-items:center;
+    justify-content:space-between; padding:0 12px; font-size:14px; font-weight:600}
+  #panoBar button{background:rgba(255,255,255,.16); color:#fff; border:1px solid rgba(255,255,255,.3);
+    border-radius:8px; padding:7px 12px; font:inherit; font-weight:700; cursor:pointer}
+  #panoFrame{flex:1; width:100%; border:0}
+  .loading{opacity:.6; pointer-events:none}
+</style>
+</head>
+<body>
+
+<div class="wrap" id="gate">
+  <div class="hero">
+    <span class="badge">TÜSKA & SKS Hastane (Sürüm 6.1) · İlaç Yönetimi</span>
+    <h1>Hastane Eczanesi Akreditasyon Yönetim Panosu</h1>
+    <p>Akreditasyon hazırlığını baştan sona yönetin: kontrol listesi, yol haritası, belgeler için
+       adım adım rehber + indirilebilir taslaklar, standart tam metin ve kritik denetim noktaları —
+       telefon, tablet ve bilgisayarda, çevrimdışı çalışır.</p>
+  </div>
+
+  <div class="grid two">
+    <!-- SOL: tanıtım + fiyat -->
+    <div class="card">
+      <h2>Üyelikle neler var?</h2>
+      <ul class="feat">
+        <li>Tüm SİY maddeleri için <b>kontrol listesi</b> (ilerleme cihazda kaydedilir)</li>
+        <li>TÜSKA süreci & <b>puanlama özeti</b></li>
+        <li>Adım adım <b>yol haritası</b></li>
+        <li>Her belge için <b>nasıl yapılır</b> + <b>doldurulabilir taslak indirme</b></li>
+        <li><b>Standart tam metin</b> (SİY01–SİY15) + Yazdır/PDF</li>
+        <li>Kritik noktalar & sık denetim bulguları</li>
+      </ul>
+      <h3>Üyelik bedeli</h3>
+      <div class="price" id="priceBox">₺— <small>/ tek seferlik</small></div>
+      <p class="note">Ödeme onaylandıktan sonra size özel <b>erişim kodu</b> iletilir; kod ile panonun tamamı açılır.</p>
+    </div>
+
+    <!-- SAĞ: giriş / üyelik -->
+    <div class="card">
+      <div class="tabs">
+        <button id="tabLogin" class="active" onclick="setTab('login')">Giriş yap</button>
+        <button id="tabJoin" onclick="setTab('join')">Üye ol</button>
+      </div>
+
+      <!-- GİRİŞ -->
+      <div id="paneLogin">
+        <h2>Üye girişi</h2>
+        <p class="note">Size iletilen erişim kodunu girin. Kod cihazınızda saklanır, tekrar girmeniz gerekmez.</p>
+        <label for="kod">Erişim kodu</label>
+        <input id="kod" type="text" inputmode="latin" autocomplete="off" placeholder="ECZ-XXXX-XXXX-XXXX" />
+        <button class="btn" id="girisBtn" onclick="girisYap()">Panoyu aç</button>
+        <div class="msg" id="loginMsg"></div>
+      </div>
+
+      <!-- ÜYE OL -->
+      <div id="paneJoin" style="display:none">
+        <h2>Üyelik talebi</h2>
+        <p class="note">Bilgilerinizi gönderin; ödeme talimatı görüntülenir. Ödeme sonrası erişim kodunuzu iletiriz.</p>
+        <div class="row">
+          <div><label for="ad">Ad Soyad</label><input id="ad" type="text" /></div>
+          <div><label for="kurum">Kurum / Hastane</label><input id="kurum" type="text" /></div>
+        </div>
+        <div class="row">
+          <div><label for="gorev">Göreviniz</label><input id="gorev" type="text" placeholder="Mesul müdür eczacı vb." /></div>
+          <div><label for="tel">Telefon (WhatsApp)</label><input id="tel" type="tel" inputmode="tel" placeholder="05XX XXX XX XX" /></div>
+        </div>
+        <label for="eposta">E-posta</label>
+        <input id="eposta" type="email" inputmode="email" placeholder="ornek@eposta.com" />
+        <label for="not">Not (opsiyonel)</label>
+        <textarea id="not" placeholder="Eklemek istedikleriniz…"></textarea>
+        <div class="consent">
+          <input id="kvkk" type="checkbox" />
+          <label for="kvkk">Talebimin değerlendirilmesi ve benimle iletişim kurulması amacıyla
+            paylaştığım bilgilerin işlenmesine (KVKK) onay veriyorum.</label>
+        </div>
+        <button class="btn wa" onclick="talepGonder('wa')">WhatsApp ile gönder</button>
+        <button class="btn ghost" onclick="talepGonder('mail')">E-posta ile gönder</button>
+        <div class="msg" id="joinMsg"></div>
+
+        <div class="pay" id="payBox">
+          <h3 style="margin-top:0">Ödeme talimatı</h3>
+          <div>Tutar: <b id="payPrice">₺—</b></div>
+          <div style="margin-top:8px">Alıcı: <b id="payName">—</b></div>
+          <div style="margin-top:8px">IBAN:</div>
+          <div class="iban" id="payIban">—</div>
+          <div id="payPaparaRow" style="margin-top:8px; display:none">Papara: <b id="payPapara">—</b></div>
+          <button class="btn ghost" style="margin-top:10px" onclick="ibanKopyala()">IBAN'ı kopyala</button>
+          <p class="note" style="margin-top:10px">Açıklamaya <b>ad-soyadınızı</b> yazın. Ödeme sonrası
+            <b>dekontu WhatsApp'tan</b> iletin; en kısa sürede erişim kodunuz gönderilir.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <details>
+    <summary>Sıkça sorulanlar</summary>
+    <p class="note">
+      <b>Kod nasıl çalışır?</b> Pano içeriği şifrelidir; doğru erişim kodu olmadan açılmaz.
+      Kodu girince içerik cihazınızda çözülür ve internetsiz de kullanılabilir.<br><br>
+      <b>Birden çok cihazda kullanabilir miyim?</b> Evet, kodu girdiğiniz her cihazda açılır.
+      Kodu lütfen paylaşmayın; paylaşılan kodlar iptal edilebilir.<br><br>
+      <b>İade?</b> Dijital içerik olduğundan, erişim kodu iletildikten sonra iade yapılamaz.
+    </p>
+  </details>
+
+  <footer>
+    <div>Bu pano bir <b>hazırlık/eğitim aracıdır</b>; bağlayıcı resmî metin için TÜSKA SAS ve
+      SKS Hastane (Sürüm 6.1) esas alınmalıdır.</div>
+    <div style="margin-top:6px">© <span id="yil"></span> · Tüm hakları saklıdır · <a href="yonetici.html">Yönetici</a></div>
+  </footer>
+</div>
+
+<!-- Giriş sonrası: pano -->
+<div id="panoWrap">
+  <div id="panoBar">
+    <span>🔓 Üye erişimi — Eczane Akreditasyon Panosu</span>
+    <button onclick="cikisYap()">Çıkış</button>
+  </div>
+  <iframe id="panoFrame" title="Eczane Akreditasyon Panosu"></iframe>
+</div>
+
+<script>
+/* ============================================================
+   AYARLAR — kendi bilgilerinizle değiştirin (placeholder'lar)
+   ============================================================ */
+const CFG = {
+  fiyat:    "₺499",                 // göstermek istediğiniz tutar
+  whatsapp: "905XXXXXXXXX",         // ülke kodu + numara, BAŞINDA + ve boşluk YOK (örn 905321234567)
+  email:    "memuratozturk@gmail.com",
+  odeme: {
+    ad:     "AD SOYAD",             // IBAN sahibi
+    iban:   "TR00 0000 0000 0000 0000 0000 00",
+    papara: ""                      // varsa Papara no; yoksa boş bırakın
+  }
+};
+const ENC_URL = "pano.enc.json";
+const LS_KEY  = "pano_erisim_kodu";
+
+/* ---- yardımcılar ---- */
+const $ = (id)=>document.getElementById(id);
+document.getElementById("yil").textContent = new Date().getFullYear();
+$("priceBox").innerHTML = CFG.fiyat + ' <small>/ tek seferlik</small>';
+
+function setTab(t){
+  const login = t==="login";
+  $("tabLogin").classList.toggle("active",login);
+  $("tabJoin").classList.toggle("active",!login);
+  $("paneLogin").style.display = login?"block":"none";
+  $("paneJoin").style.display  = login?"none":"block";
+}
+
+function b64ToBytes(s){ return Uint8Array.from(atob(s), c=>c.charCodeAt(0)); }
+
+async function panoCoz(kod){
+  if(!(window.crypto && crypto.subtle)) throw new Error("Tarayıcı şifrelemeyi desteklemiyor (HTTPS gerekli).");
+  const r = await fetch(ENC_URL, {cache:"no-store"});
+  if(!r.ok) throw new Error("Şifreli içerik bulunamadı.");
+  const p = await r.json();
+  const salt=b64ToBytes(p.salt), iv=b64ToBytes(p.iv), ct=b64ToBytes(p.ct);
+  const base = await crypto.subtle.importKey("raw", new TextEncoder().encode(kod), "PBKDF2", false, ["deriveKey"]);
+  const key  = await crypto.subtle.deriveKey(
+    {name:"PBKDF2", salt, iterations:p.iter, hash:"SHA-256"},
+    base, {name:"AES-GCM", length:256}, false, ["decrypt"]);
+  const buf  = await crypto.subtle.decrypt({name:"AES-GCM", iv}, key, ct); // yanlış kodda hata fırlatır
+  return new TextDecoder().decode(buf);
+}
+
+function panoGoster(html){
+  $("gate").style.display = "none";
+  const w = $("panoWrap");
+  w.style.display = "flex";
+  $("panoFrame").srcdoc = html;
+  window.scrollTo(0,0);
+}
+
+async function girisYap(){
+  const kod = $("kod").value.trim();
+  const msg = $("loginMsg"), btn = $("girisBtn");
+  msg.className="msg"; msg.textContent="";
+  if(!kod){ msg.className="msg err"; msg.textContent="Lütfen erişim kodunu girin."; return; }
+  btn.classList.add("loading"); btn.textContent="Açılıyor…";
+  try{
+    const html = await panoCoz(kod);
+    localStorage.setItem(LS_KEY, kod);
+    panoGoster(html);
+  }catch(e){
+    msg.className="msg err";
+    msg.textContent = /bulunamad|HTTPS|desteklem/.test(e.message) ? e.message
+      : "Erişim kodu hatalı. Lütfen kontrol edip tekrar deneyin.";
+  }finally{
+    btn.classList.remove("loading"); btn.textContent="Panoyu aç";
+  }
+}
+
+function cikisYap(){
+  localStorage.removeItem(LS_KEY);
+  location.reload();
+}
+
+/* ---- üyelik talebi ---- */
+function talepMetni(){
+  const ad=$("ad").value.trim(), kurum=$("kurum").value.trim(), gorev=$("gorev").value.trim(),
+        tel=$("tel").value.trim(), eposta=$("eposta").value.trim(), not=$("not").value.trim();
+  return {ad,kurum,gorev,tel,eposta,not,
+    text:`ÜYELİK TALEBİ — Eczane Akreditasyon Panosu\n`+
+         `Ad Soyad: ${ad}\nKurum: ${kurum}\nGörev: ${gorev}\nTelefon: ${tel}\nE-posta: ${eposta}\n`+
+         (not?`Not: ${not}\n`:``)};
+}
+
+function talepGonder(kanal){
+  const msg=$("joinMsg"); msg.className="msg"; msg.textContent="";
+  const d=talepMetni();
+  if(!d.ad || !d.tel && !d.eposta){
+    msg.className="msg err"; msg.textContent="Lütfen ad-soyad ve en az bir iletişim (telefon veya e-posta) girin."; return;
+  }
+  if(!$("kvkk").checked){ msg.className="msg err"; msg.textContent="Devam etmek için KVKK onayını işaretleyin."; return; }
+
+  if(kanal==="wa"){
+    if(/X/.test(CFG.whatsapp)){ msg.className="msg err"; msg.textContent="WhatsApp numarası henüz ayarlanmamış (yönetici)."; }
+    window.open(`https://wa.me/${CFG.whatsapp}?text=${encodeURIComponent(d.text)}`,"_blank");
+  }else{
+    const sub=encodeURIComponent("Üyelik Talebi — Eczane Akreditasyon Panosu");
+    window.location.href=`mailto:${CFG.email}?subject=${sub}&body=${encodeURIComponent(d.text)}`;
+  }
+  // ödeme talimatını göster
+  $("payPrice").textContent=CFG.fiyat;
+  $("payName").textContent=CFG.odeme.ad;
+  $("payIban").textContent=CFG.odeme.iban;
+  if(CFG.odeme.papara){ $("payPaparaRow").style.display="block"; $("payPapara").textContent=CFG.odeme.papara; }
+  $("payBox").classList.add("show");
+  if(!msg.textContent){ msg.className="msg ok"; msg.textContent="Talebiniz hazırlandı. Lütfen ödeme talimatını izleyin ve dekontu iletin."; }
+}
+
+function ibanKopyala(){
+  navigator.clipboard?.writeText(CFG.odeme.iban.replace(/\s/g,""))
+    .then(()=>{ const m=$("joinMsg"); m.className="msg ok"; m.textContent="IBAN kopyalandı."; });
+}
+
+/* ---- oturum hatırlama: kod kayıtlıysa otomatik aç ---- */
+(async function(){
+  const kayitli = localStorage.getItem(LS_KEY);
+  if(kayitli){
+    try{ const html=await panoCoz(kayitli); panoGoster(html); }
+    catch(e){ localStorage.removeItem(LS_KEY); /* kod artık geçersiz → giriş ekranı kalır */ }
+  }
+})();
+
+$("kod").addEventListener("keydown", e=>{ if(e.key==="Enter") girisYap(); });
+</script>
+</body>
+</html>
